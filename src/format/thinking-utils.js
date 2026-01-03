@@ -464,7 +464,7 @@ export function closeToolLoopForThinking(messages) {
         });
 
         logger.debug('[ThinkingUtils] Applied thinking recovery for interrupted tool');
-    } else {
+    } else if (state.inToolLoop) {
         // For tool loops: add synthetic messages to close the loop
         const syntheticText = state.toolResultCount === 1
             ? '[Tool execution completed.]'
