@@ -195,13 +195,13 @@
                                         <!-- Threshold indicator (inline) -->
                                         <span x-show="row.effectiveThresholdPct > 0"
                                               class="text-[10px] text-gray-500"
-                                              x-text="row.hasVariedThresholds
+                                              x-text="row.hasVariedThresholds && row.quotaInfo.some(q => q.thresholdPct > 0)
                                                   ? '· min ' + Math.min(...row.quotaInfo.map(q => q.thresholdPct).filter(t => t > 0)) + '–' + row.effectiveThresholdPct + '%'
                                                   : '· min ' + row.effectiveThresholdPct + '%'"></span>
                                         <!-- Inline reset time (compact only) -->
                                         <span x-show="$store.settings.compact && row.resetIn && row.resetIn !== '-'"
                                               class="text-[10px]"
-                                              :class="(row.resetIn && row.resetIn.indexOf('h') === -1) ? 'text-neon-purple' : 'text-gray-500'"
+                                              :class="row.resetIn.indexOf('h') === -1 ? 'text-neon-purple' : 'text-gray-500'"
                                               x-text="'· ' + row.resetIn"></span>
                                     </span>
                                     <span class="flex items-center gap-2">
@@ -270,7 +270,7 @@
                                                   x-text="q.pct + '%'"></span>
                                             <span x-show="q.resetTime"
                                                   class="text-[9px] font-mono text-gray-600 w-12 text-right flex-shrink-0"
-                                                  x-text="q.resetTime ? window.utils.formatTimeUntil(q.resetTime) : ''"></span>
+                                                  x-text="window.utils.formatTimeUntil(q.resetTime)"></span>
                                         </div>
                                     </template>
                                 </div>
