@@ -49,14 +49,14 @@ window.Components.claudeConfig = () => ({
 
     init() {
         // Only fetch config if this is the active sub-tab
-        if (this.activeTab === 'claude') {
+        if (this.$store.global.settingsTab === 'claude') {
             this.fetchConfig();
             this.fetchPresets();
             this.fetchMode();
         }
 
-        // Watch local activeTab (from parent settings scope, skip initial trigger)
-        this.$watch('activeTab', (tab, oldTab) => {
+        // Watch settings sub-tab (skip initial trigger)
+        this.$watch('$store.global.settingsTab', (tab, oldTab) => {
             if (tab === 'claude' && oldTab !== undefined) {
                 this.fetchConfig();
                 this.fetchPresets();
