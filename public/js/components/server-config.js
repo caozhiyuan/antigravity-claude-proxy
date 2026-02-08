@@ -1121,6 +1121,11 @@ window.Components.serverConfig = () => ({
                 this.jsonParseError = store.t('invalidJson') || 'Invalid JSON';
                 return;
             }
+            // Must be a plain object (not null, not an array, not a primitive)
+            if (typeof configPayload !== 'object' || configPayload === null || Array.isArray(configPayload)) {
+                this.jsonParseError = store.t('invalidJson') || 'Invalid JSON';
+                return;
+            }
         } else {
             // Build nested config from flat UI draft
             configPayload = this.buildConfigFromDraft(this.editingConfigDraft);
